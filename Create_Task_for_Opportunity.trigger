@@ -1,7 +1,7 @@
 trigger CreateTask on Opportunity (after insert) {
     List<Task> tasksToCreate = new List<Task>();
-
-    for (Opportunity opp : Trigger.new) {
+    if(Trigger.isInsert){
+      for (Opportunity opp : Trigger.new) {
         if (opp.Amount != null && opp.Amount > 10000 && opp.CloseDate >= Date.today()) {
             Task t = new Task();
             t.Subject = 'Suivi Opportunité Importante';
@@ -16,6 +16,6 @@ trigger CreateTask on Opportunity (after insert) {
 
     if (!tasksToCreate.isEmpty()) {
         insert tasksToCreate;
+    }  
     }
-
 }
