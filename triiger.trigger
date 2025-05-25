@@ -1,4 +1,4 @@
-trigger contactsDouble on SOBJECT (before insert) {
+trigger contactsDouble on Contact (before insert) {
     // Rassembler les AccountId des nouveaux contacts et leurs emails
     Set<Id> accountIds = new Set<Id>();
     Map<Id, Set<String>> newEmailsByAccount = new Map<Id, Set<String>>();
